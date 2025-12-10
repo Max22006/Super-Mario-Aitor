@@ -48439,7 +48439,7 @@ Transform:
   m_GameObject: {fileID: 1903016413}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -94.51, y: 16.3, z: 0}
+  m_LocalPosition: {x: -97.89, y: 9.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -48505,7 +48505,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPosition: {x: -97.79, y: 8.12, z: 0}
   movementSpeed: 5
+  jumpForce: 10
   direction: 1
+  rigidbody2D: {fileID: 0}
 --- !u!1 &1903950306
 GameObject:
   m_ObjectHideFlags: 0

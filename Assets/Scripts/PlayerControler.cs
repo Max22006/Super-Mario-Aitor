@@ -12,24 +12,30 @@ public class PlayerControler : MonoBehaviour
 
     private InputAction moveAction;
     private Vector2 moveDirection;
+    private InputAction jumpAction;
 
     public Rigidbody2D rigidbody2D;
+    private SpriteRenderer render;
+
+    private GroundSensor sensor;
 
     void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+
+        render = GetComponent<SpriteRenderer>();
+
+        sensor = GetComponentInChildren<GroundSensor>();
+
+        moveAction = InputSystem.actions["Move"];
+
+        jumpAction = InputSystem.actions["Jump"];
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         transform.position = startPosition; 
-
-        moveAction = InputSystem.actions["Move"];
-
-        rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-
-
     }
 
     // Update is called once per frame
@@ -49,6 +55,22 @@ public class PlayerControler : MonoBehaviour
 
         //transform.Translate(new Vector3(moveDirection.x * movementSpeed * Time.deltaTime, 0, 0));
 
-        transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + moveDirection.x, transform.position.y), movementSpeed * Time.deltaTime);
+       // transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + moveDirection.x, transform.position.y), movementSpeed * Time.deltaTime);
+        
+        rigidbody2D.linearVelocity = new Vector2(moveDirection.x * movementSpeed, rigidbody2D.linearVelocity.y);
+        
+        if (jumpAction.WasPressedThisFrame() && sensor.isGrounded)
+        {
+             rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+        if (moveDirection.x > 0)
+        {
+            render.flipX = false;
+        }
+        else if (moveDirection.x < 0)
+        {
+            render.flipX = true;
+        }
+
     }
 }

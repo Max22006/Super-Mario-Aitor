@@ -19,6 +19,8 @@ public class PlayerControler : MonoBehaviour
 
     private GroundSensor sensor;
 
+    private Animator animator;
+
     void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -26,6 +28,8 @@ public class PlayerControler : MonoBehaviour
         render = GetComponent<SpriteRenderer>();
 
         sensor = GetComponentInChildren<GroundSensor>();
+
+        animator = GetComponent<Animator>();
 
         moveAction = InputSystem.actions["Move"];
 
@@ -62,14 +66,24 @@ public class PlayerControler : MonoBehaviour
         if (jumpAction.WasPressedThisFrame() && sensor.isGrounded)
         {
              rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    
         }
+
+        animator.SetBool("IsJumping", !sensor.isGrounded);
+
         if (moveDirection.x > 0)
         {
             render.flipX = false;
+            animator.SetBool("IsRunning", true);
         }
         else if (moveDirection.x < 0)
         {
             render.flipX = true;
+            animator.SetBool("IsRunning", true);
+        }
+        else
+        {
+            animator.SetBool("IsRunning", false);
         }
 
     }

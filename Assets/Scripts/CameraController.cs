@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private Transform cameraTarget;
+    public Vector3 startPosition;
 
+    private Transform cameraTarget;
     public Vector3 cameraOffset;
     
     public Vector2 minCameraPosition;

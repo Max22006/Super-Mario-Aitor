@@ -9,6 +9,10 @@ public class WallSensor : MonoBehaviour
         {
             isCollision = true;
         }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+          Destroy(collision.gameObject);  
+        }
     }
 
     // Update is called once per frame

@@ -34,11 +34,4 @@ public class GoombaControl : MonoBehaviour
         }
 
     }
-   // void OnCollisionEnter2D(Collider2D collision)
-    //{
-        //if (collision.gameObject.tag == "Tuberias")
-      //  {
-            
-       // }
-   // }
 }

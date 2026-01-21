@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GoombaControl : MonoBehaviour
+public class GoombaController : MonoBehaviour
 {
     
     public float movementSpeed = 2f;
@@ -8,7 +8,12 @@ public class GoombaControl : MonoBehaviour
 
     private Rigidbody2D rigidbody2D;
     private Animator animator;
-    private WallSensor sensor;
+    public WallSensor sensor;
+    private AudioSource _audioSource;
+    public AudioClip deathSFX;
+    private BoxCollider2D _boxCollider;
+    private GameManager _gameManager;
+
     
     void Awake()
     {
@@ -17,6 +22,13 @@ public class GoombaControl : MonoBehaviour
         animator = GetComponent<Animator>();
 
         sensor = GetComponentInChildren<WallSensor>();
+
+        _audioSource = GetComponent<AudioSource>();
+
+        _boxCollider = GetComponent<BoxCollider2D>();
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
+        
     }
 
     void Start()
@@ -32,6 +44,30 @@ public class GoombaControl : MonoBehaviour
         {
             direction *= -1;
         }
+
+    }
+    public void GoombaDeath()
+    {
+        _gameManager.AddKill();
+        //Destroy(gameObject.CompareTag("Wall Sensor"));
+        sensor.enabled = false;
+
+        _audioSource.PlayOneShot(deathSFX);
+
+        //_audioSource.clip = deathSFX;
+        //_audioSource.Play();
+
+        movementSpeed = 0;
+
+       _boxCollider.enabled = false;
+       
+
+        //WallSensor _sensorScript = collision.gameObject.GetComponent<WallSensor>();
+        //sensor.isCollision = false;
+        
+        //Destroy(gameObject, 0.5f);
+        
+
 
     }
 }

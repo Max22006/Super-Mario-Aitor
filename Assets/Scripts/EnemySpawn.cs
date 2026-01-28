@@ -1,15 +1,19 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemySpawn : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    private BoxCollider2D _boxCollider;
+    public GameObject[] enemyPrefab;
 
-    public Transform spawnPosition;
+    public Transform [] spawnPoints;
+
+    public int enemiesToSpawn = 5;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        
+        _boxCollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -17,15 +21,36 @@ public class EnemySpawn : MonoBehaviour
     {
         
     }
-    void SpawnEnemy ()
+    //void SpawnEnemy ()
+    //{
+       // for (int i = 0; i < enemiesToSpawn; i++)
+       // {
+         // Instantiate(enemyPrefab, spawnPosition.position, Quaternion.identity);
+        //}
+   // }
+    IEnumerator SpawnEnemy ()
     {
-        Instantiate(enemyPrefab, spawnPosition.position, Quaternion.identity);
+        for (int i = 0; i < enemiesToSpawn; i++)
+        {
+          //Instantiate(enemyPrefab, spawnPosition.position, Quaternion.identity);
+          //Instantiate(enemyPrefab, spawnPosition2.position, Quaternion.identity);
+          //Instantiate(enemyPrefab, spawnPoints[0].position, Quaternion.identity);
+          foreach (Transform item in spawnPoints)
+          {
+            Instantiate(enemyPrefab[Random.Range(0, enemyPrefab.Length)], item.position, Quaternion.identity);
+          }
+          yield return new WaitForSeconds(0.5f);
+        }
     }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SpawnEnemy();
+            _boxCollider.enabled = false;
+            //SpawnEnemy();
+            StartCoroutine(SpawnEnemy());
+            //StartCoroutine("SpawnEnemy");
         }
     }
 }

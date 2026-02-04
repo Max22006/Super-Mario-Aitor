@@ -17,7 +17,6 @@ public class WallSensor : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Player"))
         {
-            animator.
             Destroy(collision.gameObject);
         }
     }

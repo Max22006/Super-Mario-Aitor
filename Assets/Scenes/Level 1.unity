@@ -50877,7 +50877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1932835369}
   m_Layer: 0
-  m_Name: Pared Goombas
+  m_Name: Pared Enemigos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

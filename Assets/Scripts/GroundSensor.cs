@@ -18,7 +18,7 @@ public class GroundSensor : MonoBehaviour
         {
             isGrounded = true;
         }
-       if (collision.gameObject.layer == 7)
+        if (collision.gameObject.layer == 7)
         {
           //Destroy(collision.gameObject);  
           GoombaController _enemyScript = collision.gameObject.GetComponent<GoombaController>();

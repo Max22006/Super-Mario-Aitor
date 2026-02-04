@@ -9,6 +9,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _audioSource = GetComponent<AudioSource>();
         _bgmMusic = GameObject.Find("BGM Manager").GetComponent<BGMManager>();
@@ -23,7 +24,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            _bgmMusic._audioSource.Stop();
+            _bgmMusic.audioSource.Stop();
             _audioSource.PlayOneShot(flagSFX);
         }
     }

@@ -4,10 +4,16 @@ public class WallSensor : MonoBehaviour
 {
      public bool isCollision;
      private Animator animator;
+     private AudioSource _audioSource;
+     public AudioClip killSFX;
+     private BGMManager _bgmMusic;
+     
      
      void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = GameObject.Find("Mario_0").GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
+        _bgmMusic = GameObject.Find("BGM Manager").GetComponent<BGMManager>();
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -17,6 +23,9 @@ public class WallSensor : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Player"))
         {
+            animator.SetBool.
+            _bgmMusic.audioSource.Stop();
+            _audioSource.PlayOneShot(killSFX);
             Destroy(collision.gameObject);
         }
     }

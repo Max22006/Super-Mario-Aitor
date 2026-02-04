@@ -2732,7 +2732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9710fe9610c649a47ab527658a8b3131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flagSFX: {fileID: 8300000, guid: d9357271ac5134a4bbc7ff4e5b9d4d2a, type: 3}
+  flagSFX: {fileID: 8300000, guid: 228a353b837c5c1499a97075c18dc7a5, type: 3}
 --- !u!61 &85635268
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7711,11 +7711,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315212065}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48083f3418220e149a4a439e84a159ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _audioSource: {fileID: 0}
   gameMusic: {fileID: 8300000, guid: 65691154fdb2b244d8a15838d9c47913, type: 3}
 --- !u!82 &315212067
 AudioSource:
@@ -50008,6 +50009,7 @@ GameObject:
   - component: {fileID: 1903016417}
   - component: {fileID: 1903016418}
   - component: {fileID: 1903016419}
+  - component: {fileID: 1903016420}
   m_Layer: 0
   m_Name: Mario_0
   m_TagString: Player
@@ -50177,6 +50179,7 @@ MonoBehaviour:
   bounceForce: 15
   direction: 1
   rigidbody2D: {fileID: 0}
+  jumpSFX: {fileID: 8300000, guid: a67ee060890ba824aa94165cf123918d, type: 3}
 --- !u!95 &1903016419
 Animator:
   serializedVersion: 7
@@ -50199,6 +50202,103 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!82 &1903016420
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903016413}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1903950306
 GameObject:
   m_ObjectHideFlags: 0

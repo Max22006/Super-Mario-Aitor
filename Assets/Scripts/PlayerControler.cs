@@ -22,6 +22,9 @@ public class PlayerControler : MonoBehaviour
 
     private Animator animator;
 
+    public AudioClip jumpSFX;
+    private AudioSource _audioSource;
+
     void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -31,6 +34,8 @@ public class PlayerControler : MonoBehaviour
         sensor = GetComponentInChildren<GroundSensor>();
 
         animator = GetComponent<Animator>();
+
+        _audioSource = GetComponent<AudioSource>();
 
         moveAction = InputSystem.actions["Move"];
 
@@ -66,8 +71,9 @@ public class PlayerControler : MonoBehaviour
         
         if (jumpAction.WasPressedThisFrame() && sensor.isGrounded)
         {
-             rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-    
+            rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            
+            _audioSource.PlayOneShot(jumpSFX);
         }
 
         animator.SetBool("IsJumping", !sensor.isGrounded);

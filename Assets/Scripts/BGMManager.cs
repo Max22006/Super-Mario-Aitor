@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class BGMManager : MonoBehaviour
 {
-    private AudioSource _audioSource;
+    public AudioSource _audioSource;
     
     public AudioClip gameMusic;
 
     void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
-
-        
 
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created

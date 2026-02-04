@@ -23,10 +23,10 @@ public class WallSensor : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Player"))
         {
-            animator.SetBool.
+            animator.SetBool("IsDeath", true);
             _bgmMusic.audioSource.Stop();
             _audioSource.PlayOneShot(killSFX);
-            Destroy(collision.gameObject);
+            Destroy(collision.gameObject, 1.5f);
         }
     }
 

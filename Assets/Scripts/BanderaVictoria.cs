@@ -6,6 +6,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private AudioSource _audioSource;
     public AudioClip flagSFX;
     private BGMManager _bgmMusic;
+    private 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {

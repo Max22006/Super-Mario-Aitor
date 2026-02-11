@@ -14,6 +14,7 @@ public class PlayerControler : MonoBehaviour
     private InputAction moveAction;
     private Vector2 moveDirection;
     private InputAction jumpAction;
+    private InputAction _pauseAction;
 
     public Rigidbody2D rigidbody2D;
     private SpriteRenderer render;
@@ -24,6 +25,8 @@ public class PlayerControler : MonoBehaviour
 
     public AudioClip jumpSFX;
     private AudioSource _audioSource;
+
+    private GameManager _gameManager;
 
     void Awake()
     {
@@ -37,9 +40,13 @@ public class PlayerControler : MonoBehaviour
 
         _audioSource = GetComponent<AudioSource>();
 
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
         moveAction = InputSystem.actions["Move"];
 
         jumpAction = InputSystem.actions["Jump"];
+
+        _pauseAction = InputSystem.actions["Pause"];
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -51,6 +58,15 @@ public class PlayerControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+         if (_pauseAction.WasPressedThisFrame())
+        {
+            _gameManager.Pause();
+        }
+
+        if (_gameManager._pause == true)
+        {
+            return;
+        }
         //transform.position = new Vector3(transform.position.x + direction * movementSpeed * Time.deltaTime, transform.position.y, transform.position.z);
 
         //transform.Translate(new Vector3(direction * movementSpeed * Time.deltaTime, 0, 0));
@@ -78,7 +94,7 @@ public class PlayerControler : MonoBehaviour
 
         animator.SetBool("IsJumping", !sensor.isGrounded);
 
-        if (moveDirection.x > 0)
+        if (moveDirection.x > 0 )
         {
             render.flipX = false;
             animator.SetBool("IsRunning", true);
@@ -96,6 +112,7 @@ public class PlayerControler : MonoBehaviour
     }
     public void Bounce()
     {
+        //rigidbody2D.linearVelocity = new Vector2(rigidbody2D.linearVelocity)
         rigidbody2D.AddForce(Vector2.up * bounceForce, ForceMode2D.Impulse);
     }
 }

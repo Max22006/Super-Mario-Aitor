@@ -7,6 +7,8 @@ public class WallSensor : MonoBehaviour
      private AudioSource _audioSource;
      public AudioClip killSFX;
      private BGMManager _bgmMusic;
+
+     private GameManager _gameManager;
      
      
      void Awake()
@@ -15,6 +17,7 @@ public class WallSensor : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _bgmMusic = GameObject.Find("BGM Manager").GetComponent<BGMManager>();
         _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+       
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -24,10 +27,13 @@ public class WallSensor : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Player"))
         {
+            
             animator.SetBool("IsDeath", true);
             _bgmMusic.audioSource.Stop();
             _audioSource.PlayOneShot(killSFX);
             Destroy(collision.gameObject, 1.5f);
+
+            StartCoroutine(_gameManager.DelayScene());
         }
     }
 

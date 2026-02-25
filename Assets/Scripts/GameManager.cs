@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     public bool _pause;
     public GameObject pauseCanvas;
+    public GameObject victoryCanvas;
+    
 
     
 
@@ -50,5 +54,23 @@ public class GameManager : MonoBehaviour
         
         pauseCanvas.SetActive(_pause);
     }
-    
+    public void ChangeScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+        //LoadSceneAsync
+    }
+    public IEnumerator DelayScene()
+    {
+        
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("Game Over");
+        
+    }
+    public IEnumerator DelayVictory()
+    {
+        
+        yield return new WaitForSeconds(2);
+        victoryCanvas.SetActive(true);
+        
+    }
 }

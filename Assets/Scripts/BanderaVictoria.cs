@@ -6,7 +6,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private AudioSource _audioSource;
     public AudioClip flagSFX;
     private BGMManager _bgmMusic;
-    private 
+    private GameManager _gameManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -14,6 +14,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _audioSource = GetComponent<AudioSource>();
         _bgmMusic = GameObject.Find("BGM Manager").GetComponent<BGMManager>();
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
     }
 
     // Update is called once per frame
@@ -27,6 +29,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
         {
             _bgmMusic.audioSource.Stop();
             _audioSource.PlayOneShot(flagSFX);
+            StartCoroutine(_gameManager.DelayVictory());
+
         }
     }
 }

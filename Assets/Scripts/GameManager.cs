@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator DelayVictory()
     {
         
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
         victoryCanvas.SetActive(true);
         
     }

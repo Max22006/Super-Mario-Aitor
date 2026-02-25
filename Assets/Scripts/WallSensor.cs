@@ -14,6 +14,7 @@ public class WallSensor : MonoBehaviour
         animator = GameObject.Find("Mario_0").GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         _bgmMusic = GameObject.Find("BGM Manager").GetComponent<BGMManager>();
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
     void OnTriggerEnter2D(Collider2D collision)
     {

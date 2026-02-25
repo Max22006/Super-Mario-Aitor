@@ -26,7 +26,7 @@ public class Repaso : MonoBehaviour
 
         _moveAction = InputSystem.actions["Move"];
 
-        _jumpAction = InputSystem.action["Jump"];
+        _jumpAction = InputSystem.actions["Jump"];
 
         sensor = GetComponentInChildren<GroundSensor>();//el Getcomponet nomal no sirve porque esta dentro del mario, es un children
 
@@ -36,7 +36,7 @@ public class Repaso : MonoBehaviour
    
     void Update()
     {
-         moveDirection = moveAction.ReadValue<Vector2>(); //Vincular el direction con el action
+         _moveDirection = _moveAction.ReadValue<Vector2>(); //Vincular el direction con el action
 
          if (_jumpAction.WasPressedThisFrame() && sensor.isGrounded)
          {

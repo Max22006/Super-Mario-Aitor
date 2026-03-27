@@ -165,4 +165,12 @@ public class PlayerControler : MonoBehaviour
         }
        
     }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Power Up"))
+        {
+            _powerUpTimer = 0;
+            _canShoot = true;
+        }
+    }
 }

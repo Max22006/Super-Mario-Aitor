@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
     public float bulletSpeed = 10;
 
     public int bulletDamage = 1;
+    public float bulletImpactForce = 10;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -24,7 +25,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.layer == 7)
         {
           GoombaController _enemyScript = collision.gameObject.GetComponent<GoombaController>();
-          _enemyScript.TakeDamage(bulletDamage);
+          _enemyScript.TakeDamage(bulletDamage, transform.right, bulletImpactForce);
         }
           Destroy(gameObject);
     }

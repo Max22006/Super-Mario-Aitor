@@ -8,6 +8,7 @@ TagManager:
   - Tuberias
   - Wall Sensor
   - Coin
+  - Power Up
   layers:
   - Default
   - TransparentFX

@@ -54,9 +54,9 @@ public class GoombaController : MonoBehaviour
         }
 
     }
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        _goombaHealth--;
+        _goombaHealth -= damage;
         _healthSlider.value = _goombaHealth;
 
         if (_goombaHealth <= 0)

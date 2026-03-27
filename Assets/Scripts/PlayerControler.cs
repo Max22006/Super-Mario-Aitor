@@ -15,6 +15,7 @@ public class PlayerControler : MonoBehaviour
     private Vector2 moveDirection;
     private InputAction jumpAction;
     private InputAction _pauseAction;
+    private InputAction _attackAction;
 
     public Rigidbody2D rigidbody2D;
     private SpriteRenderer render;
@@ -27,6 +28,15 @@ public class PlayerControler : MonoBehaviour
     private AudioSource _audioSource;
 
     private GameManager _gameManager;
+
+    public GameObject bulletPrefab;
+    public Transform bulletSpawn;
+
+    public GameObject attackHitbox;
+
+    private bool _canShoot = false;
+    private float _powerUpDuration = 10;
+    private float _powerUpTimer;
 
     void Awake()
     {
@@ -47,6 +57,8 @@ public class PlayerControler : MonoBehaviour
         jumpAction = InputSystem.actions["Jump"];
 
         _pauseAction = InputSystem.actions["Pause"];
+
+        _attackAction = InputSystem.actions["Attack"];
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -96,12 +108,14 @@ public class PlayerControler : MonoBehaviour
 
         if (moveDirection.x > 0 )
         {
-            render.flipX = false;
+            //render.flipX = false;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             animator.SetBool("IsRunning", true);
         }
         else if (moveDirection.x < 0)
         {
-            render.flipX = true;
+            //render.flipX = true;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
             animator.SetBool("IsRunning", true);
         }
         else
@@ -109,10 +123,46 @@ public class PlayerControler : MonoBehaviour
             animator.SetBool("IsRunning", false);
         }
 
+        if (_attackAction.WasPressedThisFrame() && _canShoot)
+        {
+           Shoot();
+           // Attack();
+           //animator.SetTrigger("Attack");
+        }
+        
+        if (_canShoot)
+        {
+            ShootPowerUp();
+        }
+
     }
     public void Bounce()
     {
         //rigidbody2D.linearVelocity = new Vector2(rigidbody2D.linearVelocity)
         rigidbody2D.AddForce(Vector2.up * bounceForce, ForceMode2D.Impulse);
+    }
+    void Shoot()
+    {
+        Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+    }
+    void ShootPowerUp()
+    {
+        _powerUpTimer += Time.deltaTime;
+        if (_powerUpTimer >= _powerUpDuration)
+        {
+            _canShoot = false;
+        }
+    }
+    void Attack()
+    {
+        if (attackHitbox.activeInHierarchy)
+        {
+            attackHitbox.SetActive(false);
+        }
+        else
+        {
+            attackHitbox.SetActive(true);
+        }
+       
     }
 }

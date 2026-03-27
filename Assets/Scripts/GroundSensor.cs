@@ -4,6 +4,7 @@ public class GroundSensor : MonoBehaviour
 {
 
     PlayerControler _playerScript;
+    public int marioDamage = 3;
     
     void Awake ()
     {
@@ -22,7 +23,7 @@ public class GroundSensor : MonoBehaviour
         {
           //Destroy(collision.gameObject);  
           GoombaController _enemyScript = collision.gameObject.GetComponent<GoombaController>();
-          _enemyScript.TakeDamage();
+          _enemyScript.TakeDamage(marioDamage);
 
           _playerScript.Bounce();
         }

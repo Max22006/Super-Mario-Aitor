@@ -38,6 +38,8 @@ public class PlayerControler : MonoBehaviour
     private float _powerUpDuration = 10;
     private float _powerUpTimer;
 
+    public ParticleSystem _walkParticle;
+
     void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -59,6 +61,8 @@ public class PlayerControler : MonoBehaviour
         _pauseAction = InputSystem.actions["Pause"];
 
         _attackAction = InputSystem.actions["Attack"];
+
+        
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -102,6 +106,8 @@ public class PlayerControler : MonoBehaviour
             rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             
             _audioSource.PlayOneShot(jumpSFX);
+
+            _walkParticle.Stop();
         }
 
         animator.SetBool("IsJumping", !sensor.isGrounded);
@@ -111,16 +117,29 @@ public class PlayerControler : MonoBehaviour
             //render.flipX = false;
             transform.rotation = Quaternion.Euler(0, 0, 0);
             animator.SetBool("IsRunning", true);
+            
+            if (!_walkParticle.isPlaying && sensor.isGrounded)
+            {
+                _walkParticle.Play();
+            }
         }
         else if (moveDirection.x < 0)
         {
             //render.flipX = true;
             transform.rotation = Quaternion.Euler(0, 180, 0);
             animator.SetBool("IsRunning", true);
+            if (!_walkParticle.isPlaying && sensor.isGrounded)
+            {
+                _walkParticle.Play();
+            }
         }
         else
         {
             animator.SetBool("IsRunning", false);
+            if (_walkParticle.isPlaying && sensor.isGrounded)
+            {
+                _walkParticle.Stop();
+            }
         }
 
         if (_attackAction.WasPressedThisFrame() && _canShoot)

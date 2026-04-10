@@ -5,10 +5,14 @@ public class GroundSensor : MonoBehaviour
 
     PlayerControler _playerScript;
     public int marioDamage = 3;
+
+    public ParticleSystem _jumpParticle;
     
     void Awake ()
     {
         _playerScript = GetComponentInParent<PlayerControler>();
+
+        
     }
     
     public bool isGrounded;
@@ -18,6 +22,8 @@ public class GroundSensor : MonoBehaviour
         if (collision.gameObject.layer == 6)
         {
             isGrounded = true;
+
+            _jumpParticle.Play();
         }
         if (collision.gameObject.layer == 7)
         {

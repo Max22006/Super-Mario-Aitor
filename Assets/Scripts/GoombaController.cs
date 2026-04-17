@@ -17,7 +17,13 @@ public class GoombaController : MonoBehaviour
     private GameManager _gameManager;
     private Slider _healthSlider;
 
-    
+    public Transform[] patrolPoints;
+    public int patrolIndex = 0;
+
+
+    private Transform _playerPosition;  
+    public float detectionRange = 5;  
+    public float attackRange = 2;
     void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -34,6 +40,8 @@ public class GoombaController : MonoBehaviour
 
         _healthSlider = GetComponentInChildren<Slider>();
 
+        _playerPosition = GameObject.FindGameObjectWithTag("Player").transform;
+
         
     }
 
@@ -46,13 +54,74 @@ public class GoombaController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rigidbody2D.linearVelocity = new Vector2(direction * movementSpeed, rigidbody2D.linearVelocity.y);
+        //rigidbody2D.linearVelocity = new Vector2(direction * movementSpeed, rigidbody2D.linearVelocity.y);
 
-        if (sensor.isCollision)
+        //if (sensor.isCollision)
+        //{
+           // direction *= -1;
+       // }
+      
+       float distanceToPlayer = Vector3.Distance(_playerPosition.position, transform.position);
+
+       if(distanceToPlayer > detectionRange)
+       {
+        Patrol();
+       }
+       else if(distanceToPlayer < detectionRange && distanceToPlayer > attackRange)
+       {
+        FollowPlayer();
+       }
+       else if (distanceToPlayer < attackRange)
+       {
+            Attack(); 
+       }
+
+    }
+    void Patrol ()
+    {
+        
+        float distanceToPoint = Vector3.Distance(transform.position, patrolPoints[patrolIndex].position);
+
+        if (distanceToPoint < 0.5f)
         {
-            direction *= -1;
+            if(patrolIndex == 0)
+            {
+                patrolIndex = 1;
+            }
+            else
+            {
+                patrolIndex = 0;
+            }
         }
 
+        Vector3 moveDirection = patrolPoints[patrolIndex].position - transform.position;
+
+        Movement(moveDirection);
+    }
+    void FollowPlayer()
+    {
+        Vector3 moveDirection = _playerPosition.position - transform.position;
+
+        Movement(moveDirection);
+    }
+    void Movement(Vector3 moveDirection)
+    {
+        if (moveDirection.x < 0)
+        {
+            direction = -1;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else if(moveDirection.x > 0)
+        {
+            direction = 1;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        rigidbody2D.linearVelocity = new Vector2(direction * movementSpeed, rigidbody2D.linearVelocity.y);
+    }
+    void Attack()
+    {
+        direction = 0;
+        Debug.Log("Atacando");
     }
     public void TakeDamage(int damage, Vector3 impactDirection, float impactForce)
     {

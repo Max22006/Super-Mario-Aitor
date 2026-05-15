@@ -160,4 +160,12 @@ public class GoombaController : MonoBehaviour
 
 
     }
+    void OnBecameVisible()
+    {
+        _gameManager.enemiesInScreen.Add(gameObject);
+    }
+    void OnBecameInvisible()
+    {
+        _gameManager.enemiesInScreen.Remove(gameObject);
+    }
 }

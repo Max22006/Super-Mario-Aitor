@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviour
     public bool _pause;
     public GameObject pauseCanvas;
     public GameObject victoryCanvas;
+
+    public List<GameObject> enemiesInScreen;
     
 
     
@@ -27,7 +30,17 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       if (Input.GetKeyDown(KeyCode.K))
+       {
+            KillEnemiesInScreen();
+       } 
+    }
+    void KillEnemiesInScreen()
+    {
+        foreach (GameObject enemy in enemiesInScreen)
+        {
+            Destroy(enemy);
+        }
     }
     public void AddKill()
     {

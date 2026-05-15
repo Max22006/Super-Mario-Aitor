@@ -5,7 +5,7 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D _rBody2;
     public float bulletSpeed = 10;
 
-    public int bulletDamage = 1;
+    public int bulletDamage = 1; // estas 2 no hacen falta para el examen
     public float bulletImpactForce = 10;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
           GoombaController _enemyScript = collision.gameObject.GetComponent<GoombaController>();
           _enemyScript.TakeDamage(bulletDamage, transform.right, bulletImpactForce);
         }
-          Destroy(gameObject);
+          Destroy(gameObject); // solo el void ontrigger enter y el destory del final
     }
     // Update is called once per frame
     void Update()

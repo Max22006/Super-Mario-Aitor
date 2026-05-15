@@ -4260,6 +4260,7 @@ MonoBehaviour:
   _pause: 0
   pauseCanvas: {fileID: 2080250516}
   victoryCanvas: {fileID: 189812225}
+  enemiesInScreen: []
 --- !u!4 &142949296
 Transform:
   m_ObjectHideFlags: 0
